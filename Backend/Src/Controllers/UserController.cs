@@ -40,7 +40,7 @@ namespace verzel.Controllers
         [HttpPost("create")]
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Create(
-            [FromHeader(Name = "Authorization"), Required] int idUsuario,
+            [FromHeader(Name = "Authorization"), Required] string token,
             [FromBody] UserDTO user
             )
             {
@@ -73,7 +73,7 @@ namespace verzel.Controllers
         [HttpPost("login")]
         [AllowAnonymous]
         public async Task<ActionResult> Login(
-            [FromBody] UserDTO user
+            [FromBody] LoginDTO user
             )
             {
             var userDB = _serviceProvider.GetService<IUserDB>();

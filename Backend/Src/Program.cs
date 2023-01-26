@@ -11,6 +11,7 @@ var connectionString = "server=localhost; database=verzel; user=root; password=m
 var key = Encoding.ASCII.GetBytes(Config.Secret);
 
 builder.Services.AddScoped<IUserDB, UserDB>();
+builder.Services.AddScoped<ICarroDB, CarroDB>();
 
 builder.Services.AddAuthentication(x=>{
     x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
