@@ -52,6 +52,65 @@ namespace verzel.Controllers
         }
 
         /// <summary>
+        /// Alterar dados de um carro existente
+        /// </summary>
+        /// <response code="200">tipo Carro</response>
+        [HttpPost("update")]
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult> Update(
+            [FromHeader(Name = "Authorization"), Required] string token,
+            [FromBody] CarroDTO novosdados
+            )
+            {
+
+            var carroDB = _serviceProvider.GetService<ICarroDB>();
+            
+            
+            var dados = new Carro(){
+                Id = novosdados.Id,
+                Nome = novosdados.Nome,
+                Marca = novosdados.Marca,
+                Modelo = novosdados.Modelo,
+                Foto = Convert.FromBase64String(novosdados.Foto)
+            };
+
+            var carro = await carroDB.findByid(dados.Id);
+
+            if(carro is null){
+                return NotFound("Carro não encontrado");
+            }
+
+            await carroDB.updateCarro(dados);
+
+            return new CustomHttpStatus(200,dados);
+        }
+
+        /// <summary>
+        /// Deletar dados de um carro existente
+        /// </summary>
+        /// <response code="200">tipo string</response>
+        [HttpDelete("delete/{codigo_carro}")]
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult> Delete(
+            [FromHeader(Name = "Authorization"), Required] string token,
+            [FromRoute(Name = "codigo_carro")] int Id
+            )
+            {
+
+            var carroDB = _serviceProvider.GetService<ICarroDB>();
+
+            var result = await carroDB.findByid(Id);
+
+            if(result is null){
+                return NotFound("Carro não encontrado");
+            }
+
+            await carroDB.deleteCarro(Id);
+
+            return new CustomHttpStatus(200,"Carro deletado");
+        }
+
+        /// <summary>
         /// Buscar carros
         /// </summary>
         /// <response code="200">tipo Carro</response>

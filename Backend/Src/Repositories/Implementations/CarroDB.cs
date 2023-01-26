@@ -17,6 +17,24 @@ namespace verzel.Repository
             await _context.SaveChangesAsync();
         }
 
+        public async Task deleteCarro(long Id)
+        {
+            var carro = new Carro{Id = Id};
+            _context.Entry(carro).State = EntityState.Deleted;
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<Carro> findByid(long Id)
+        {
+            var carro = new Carro();
+            carro = await _context.Carros
+                            .AsNoTracking()
+                            .Where(c=>c.Id == Id)
+                            .FirstOrDefaultAsync();
+
+            return carro;
+        }
+
         public async Task<List<Carro>> searchCarro(string nome, string marca)
         {
             var carros = new List<Carro>();
@@ -54,6 +72,12 @@ namespace verzel.Repository
             carros = await _context.Carros.AsNoTracking().ToListAsync();
 
             return carros;
+        }
+        
+        public async Task updateCarro(Carro novosdados)
+        {
+            _context.Carros.Update(novosdados);
+            await _context.SaveChangesAsync();
         }
     }
 }

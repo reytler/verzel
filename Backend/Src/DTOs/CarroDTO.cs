@@ -3,6 +3,8 @@ using System.ComponentModel.DataAnnotations;
 namespace verzel.DTOs{
     public class CarroDTO {
 
+        public long Id {get; set;}
+
         [Required(ErrorMessage = "O Campo Nome é requerido")]
         public string Nome {get; set;} = "";
         
