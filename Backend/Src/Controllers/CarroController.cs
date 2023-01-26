@@ -26,10 +26,9 @@ namespace verzel.Controllers
         }
 
         /// <summary>
-        /// Criar novo usuário
+        /// Cadastrar novo carro
         /// </summary>
-        /// <response code="201">tipo User</response>
-        /// <response code="422">Email já utilizado</response>
+        /// <response code="201">tipo Carro</response>
         [HttpPost("create")]
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Create(
@@ -50,6 +49,25 @@ namespace verzel.Controllers
             await carroDB.createCarro(newCarro);
 
             return new CustomHttpStatus(201,newCarro);
+        }
+
+        /// <summary>
+        /// Buscar carros
+        /// </summary>
+        /// <response code="200">tipo Carro</response>
+        [HttpGet("search")]
+        [AllowAnonymous]
+        public async Task<ActionResult> Search(
+            [FromQuery(Name = "nome")] string? nome="",
+            [FromQuery(Name = "marca")] string? marca=""
+            )
+            {
+
+            var carroDB = _serviceProvider.GetService<ICarroDB>();
+            
+            List<Carro> carros = await carroDB.searchCarro(nome,marca);
+
+            return new CustomHttpStatus(200,carros);
         }
     }
 }

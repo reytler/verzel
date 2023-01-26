@@ -19,7 +19,11 @@ namespace verzel.Repository {
 
         public async Task<bool> searchForUsuario(string usuario)
         {
-            var user = await _context.Users.Where(u => u.Usuario == usuario).AsNoTracking().ToListAsync();
+            var user = await _context.Users
+                .Where(u => u.Usuario == usuario)
+                .AsNoTracking()
+                .ToListAsync();
+
             if(user.Count > 0){
                 return true;
             }
@@ -33,7 +37,8 @@ namespace verzel.Repository {
             var userResult = await _context.Users
             .AsNoTracking()
             .Where(u=> u.Usuario ==  user.Usuario && 
-                u.Senha == user.Senha).FirstOrDefaultAsync();
+                u.Senha == user.Senha)
+            .FirstOrDefaultAsync();
             
             return userResult;
         }
