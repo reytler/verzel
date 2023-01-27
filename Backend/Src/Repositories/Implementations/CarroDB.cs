@@ -35,6 +35,17 @@ namespace verzel.Repository
             return carro;
         }
 
+        public async Task<List<Carro>> getMycars(string Iduser)
+        {
+            var carros = new List<Carro>();
+            carros = await _context.Carros
+                .AsNoTracking()
+                .Where(c=>c.Iduser == Iduser)
+                .ToListAsync();
+            
+            return carros;
+        }
+
         public async Task<List<Carro>> searchCarro(string nome, string marca)
         {
             var carros = new List<Carro>();

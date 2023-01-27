@@ -33,6 +33,7 @@ namespace verzel.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Create(
             [FromHeader(Name = "Authorization"), Required] string token,
+            [FromHeader(Name = "Iduser"), Required] string Iduser,
             [FromBody] CarroDTO carro
             )
             {
@@ -43,6 +44,8 @@ namespace verzel.Controllers
                 Nome = carro.Nome,
                 Marca = carro.Marca,
                 Modelo = carro.Modelo,
+                Valor = carro.Valor,
+                Iduser = Iduser,
                 Foto = Convert.FromBase64String(carro.Foto)
             };
 
@@ -59,6 +62,7 @@ namespace verzel.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Update(
             [FromHeader(Name = "Authorization"), Required] string token,
+            [FromHeader(Name = "Iduser"), Required] string Iduser,
             [FromBody] CarroDTO novosdados
             )
             {
@@ -71,6 +75,8 @@ namespace verzel.Controllers
                 Nome = novosdados.Nome,
                 Marca = novosdados.Marca,
                 Modelo = novosdados.Modelo,
+                Valor = novosdados.Valor,
+                Iduser = Iduser,
                 Foto = Convert.FromBase64String(novosdados.Foto)
             };
 
@@ -78,6 +84,8 @@ namespace verzel.Controllers
 
             if(carro is null){
                 return NotFound("Carro não encontrado");
+            }else if(carro.Iduser != Iduser){
+                return new CustomHttpStatus(401,"Sem autorização para alterar carro");
             }
 
             await carroDB.updateCarro(dados);
@@ -93,6 +101,7 @@ namespace verzel.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Delete(
             [FromHeader(Name = "Authorization"), Required] string token,
+            [FromHeader(Name = "Iduser"), Required] string Iduser,
             [FromRoute(Name = "codigo_carro")] int Id
             )
             {
@@ -103,6 +112,8 @@ namespace verzel.Controllers
 
             if(result is null){
                 return NotFound("Carro não encontrado");
+            }else if(result.Iduser != Iduser){
+                return new CustomHttpStatus(401,"Sem autorização para deletar carro");
             }
 
             await carroDB.deleteCarro(Id);
@@ -126,7 +137,54 @@ namespace verzel.Controllers
             
             List<Carro> carros = await carroDB.searchCarro(nome,marca);
 
-            return new CustomHttpStatus(200,carros);
+            List<Carro> newCars = new List<Carro>();
+
+            foreach (Carro carro in carros){
+                Carro value = new Carro(){
+                    Id = carro.Id,
+                    Nome = carro.Nome,
+                    Marca = carro.Marca,
+                    Modelo = carro.Modelo,
+                    Valor = carro.Valor,
+                    Foto = carro.Foto
+                };
+                newCars.Add(value);
+            }
+
+            return new CustomHttpStatus(200,newCars);
+        }
+
+        /// <summary>
+        /// Buscar meus carros
+        /// </summary>
+        /// <response code="200">tipo Carro</response>
+        [HttpGet("mycars")]
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult> getMycars(
+            [FromHeader(Name = "Authorization"), Required] string token,
+            [FromHeader(Name = "Iduser"), Required] string Iduser
+            )
+            {
+
+            var carroDB = _serviceProvider.GetService<ICarroDB>();
+            
+            List<Carro> carros = await carroDB.getMycars(Iduser);
+
+            List<Carro> newCars = new List<Carro>();
+
+            foreach (Carro carro in carros){
+                Carro value = new Carro(){
+                    Id = carro.Id,
+                    Nome = carro.Nome,
+                    Marca = carro.Marca,
+                    Modelo = carro.Modelo,
+                    Valor = carro.Valor,
+                    Foto = carro.Foto
+                };
+                newCars.Add(value);
+            }
+
+            return new CustomHttpStatus(200,newCars);
         }
     }
 }

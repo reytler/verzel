@@ -8,6 +8,7 @@ namespace verzel.interfaces
 
         Task deleteCarro(long carro);
 
+        Task<List<Carro>> getMycars(string Iduser);
         Task<Carro> findByid(long Id);
         Task<List<Carro>> searchCarro(string nome, string marca);
     }

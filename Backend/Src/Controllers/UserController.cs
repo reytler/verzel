@@ -5,7 +5,6 @@ using verzel.Models;
 using Microsoft.AspNetCore.Mvc;
 using verzel.Services;
 using Microsoft.AspNetCore.Authorization;
-using System.ComponentModel.DataAnnotations;
 
 namespace verzel.Controllers
 {
@@ -38,9 +37,8 @@ namespace verzel.Controllers
         /// <response code="201">tipo User</response>
         /// <response code="422">Email já utilizado</response>
         [HttpPost("create")]
-        [Authorize(Roles = "Admin")]
+        [AllowAnonymous]
         public async Task<ActionResult> Create(
-            [FromHeader(Name = "Authorization"), Required] string token,
             [FromBody] UserDTO user
             )
             {
@@ -52,6 +50,7 @@ namespace verzel.Controllers
             }
 
             var newUser = new User(){
+                Id = Uuid.getUuid(),
                 Nome = user.Nome,
                 Usuario = user.Usuario,
                 Senha = Cripto.GerarHash(user.Senha),

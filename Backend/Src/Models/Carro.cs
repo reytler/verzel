@@ -16,9 +16,15 @@ namespace verzel.Models
 
         [Column("MODELO")]
         public string? Modelo {get; set;}
+
+        [Column("VALOR")]
+        public long Valor {get; set;}
         
         [Column("FOTO")]
         public byte[]? Foto {get; set;}
+
+        [Column("IDUSER")]
+        public string? Iduser {get; set;}
 
     }
 }

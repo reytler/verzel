@@ -4,9 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace verzel.Models {
     [Table("usuario")]
     public class User{
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key,Column("CODIGO")]
-        public long Id {get; set;}
+        public string? Id {get; set;}
 
         [Column("NOME")]
         public string? Nome {get; set;}
