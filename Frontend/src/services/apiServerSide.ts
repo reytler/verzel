@@ -7,11 +7,19 @@ export function getAPIClient(ctx?: any){
         baseURL: coEnderecoApi,
     });
 
-    api.interceptors.response.use(config => {
+    api.interceptors.request.use(config => {
         const { 'Verzel.Token': token } = parseCookies(ctx);
+        const { 'Verzel.User': user } = parseCookies();
+        var dados;
+        if(user){
+            dados = JSON.parse(user)
+        }
+
         if (token) {
-            api.defaults.headers['Authorization'] = token;
-            config.headers['Authorization'] = token;
+            api.defaults.headers['Authorization'] = `Bearer ${token}`;
+            config.headers['Authorization'] = `Bearer ${token}`;
+            api.defaults.headers['Iduser'] = dados.id;
+            config.headers['Iduser'] = dados.id;
         }
 
         return config;

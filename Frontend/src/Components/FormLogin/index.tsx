@@ -1,8 +1,9 @@
 import { useLogin } from "@/src/Context/Login";
 import { useState } from "react";
 import { Form, FormGroup } from "reactstrap";
+import { Button } from "../Button";
 import { Input } from "../Input";
-import { Container, Titlefrm, Wrapper, Logo, Arealogo, Border, Button } from "./styles";
+import { Container, Titlefrm, Wrapper, Logo, Arealogo, Border } from "./styles";
 
 export default function FrmLogin() {
     const {handleLogin} = useLogin();

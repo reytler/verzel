@@ -1,4 +1,5 @@
 import React from 'react';
+import { CarrosProvider } from './Carros';
 import { LoginProvider } from './Login';
 interface GlobalProps {
     children?: React.ReactNode;
@@ -6,8 +7,11 @@ interface GlobalProps {
 
 const GlobalContext: React.FC = ({ children}: GlobalProps)=>{
     return(
+        
         <LoginProvider>
-            {children}
+            <CarrosProvider>            
+                {children}
+            </CarrosProvider>
         </LoginProvider>
     )
 }
