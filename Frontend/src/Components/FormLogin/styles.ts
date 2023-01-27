@@ -6,27 +6,6 @@ export const Titlefrm = styled.h3`
     font-weight: bold;
 `;
 
-export const Inputuser = styled.input`
-    border: none;
-    border-bottom: solid 1px black;
-    width: 40vw;
-    margin-top: 15px;
-    margin-bottom: 50px;
-    &:focus{
-        outline: none;
-    }
-`;
-
-export const Inputpass = styled.input`
-    border: none;
-    border-bottom: solid 1px black;
-    width: 40vw;
-    margin-top: 15px;
-    &:focus{
-        outline: none;
-    }
-`;
-
 export const Container = styled.div`
     display: flex;
     flex-direction: column;
@@ -34,6 +13,11 @@ export const Container = styled.div`
     width: 45vw;
     margin-left: 15px;
     padding: 9vh 10vw 3vh 10vw;
+
+    .login{
+        margin-top: 30px;
+        width: 40vw;
+    }
 `;
 
 export const Wrapper = styled.div`

@@ -1,8 +1,13 @@
 import Navbar from '@/src/Components/Navbar'
-import VerificarToken from '@/src/functions/verificarToken';
+import { VerificarLogin } from '@/src/functions/verificarToken'
 import Head from 'next/head'
+import { useEffect } from 'react'
 
 export default function Home() {
+  useEffect(()=>{
+    VerificarLogin()
+  },[])
+
   return (
     <>
       <Head>
@@ -13,8 +18,4 @@ export default function Home() {
       <Navbar/>
     </>
   )
-}
-
-export async function getServerSideProps(ctx:any) {
-  return VerificarToken(ctx);
 }

@@ -97,7 +97,7 @@ namespace verzel.Controllers
                 token = token
             };
 
-            return new CustomHttpStatus(201,response);
+            return new CustomHttpStatus(200,response);
         }
     }
 }
