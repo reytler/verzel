@@ -17,6 +17,12 @@ namespace verzel.Models
         [Column("MODELO")]
         public string? Modelo {get; set;}
 
+        [Column("ANO")]
+        public int? Ano {get; set;}
+
+        [Column("KM")]
+        public long? Km {get; set;}
+
         [Column("VALOR")]
         public long Valor {get; set;}
         

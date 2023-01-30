@@ -1,4 +1,4 @@
-import { useCreateCar } from '@/src/Context/Carros';
+import { useUpdateCar } from '@/src/Context/Carros';
 import { CarroDTO } from '@/src/Types';
 import React, { useEffect, useState } from 'react';
 import { Form, FormGroup } from 'reactstrap';
@@ -7,22 +7,14 @@ import { Input } from '../Input';
 import { Title } from '../Title';
 import { Wrapped } from './styles';
 
-export default function FrmCar(){
-    const {handleCreateCar} = useCreateCar();
-    const INITIAL_STATE:CarroDTO = {
-        nome:'',
-        marca:'',
-        modelo:'',
-        ano:0,
-        km:0,
-        valor:0,
-        foto:'',
-    }
-    const [carro, setCarro] = useState<CarroDTO>(INITIAL_STATE);
+export default function FrmCar({car}:any){
+    const {handleUpdateCar} = useUpdateCar();
+    
+    const [carro, setCarro] = useState<CarroDTO>(car);
 
     function handleSubmit(e:any){
         e.preventDefault();
-        handleCreateCar(carro);
+        handleUpdateCar(carro);
     }
 
     function handleValues(key:string,value: any){
@@ -47,13 +39,10 @@ export default function FrmCar(){
         }))        
     }
 
-    useEffect(()=>{
-        console.log(carro)
-    },[carro])
-
     return(
         <Wrapped>
-           <Title>Cadastrar Veículos</Title>     
+                       
+            <Title>Editar Veículo: {carro.nome}</Title>     
             <Form onSubmit={e=>handleSubmit(e)}>
                 <FormGroup>
                     <Input
@@ -62,6 +51,7 @@ export default function FrmCar(){
                         required
                         onBlur={e=>handleValues('nome',e.target.value)}
                         className="cadcar"
+                        defaultValue={carro.nome}
                     />
                 </FormGroup>
                 <FormGroup>
@@ -71,6 +61,7 @@ export default function FrmCar(){
                         required
                         onBlur={e=>handleValues('marca',e.target.value)}
                         className="cadcar"
+                        defaultValue={carro.marca}
                     />
                 </FormGroup>
                 <FormGroup>
@@ -80,6 +71,7 @@ export default function FrmCar(){
                         required
                         onBlur={e=>handleValues('modelo',e.target.value)}
                         className="cadcar"
+                        defaultValue={carro.modelo}
                     />                
                 </FormGroup>
                 <FormGroup>
@@ -89,6 +81,7 @@ export default function FrmCar(){
                         required
                         onBlur={e=>handleValues('ano',e.target.value)}
                         className="cadcar"
+                        defaultValue={carro.ano}
                     />                
                 </FormGroup>
                 <FormGroup>
@@ -98,6 +91,7 @@ export default function FrmCar(){
                         required
                         onBlur={e=>handleValues('km',e.target.value)}
                         className="cadcar"
+                        defaultValue={carro.km}
                     />                
                 </FormGroup>
                 <FormGroup>
@@ -107,6 +101,7 @@ export default function FrmCar(){
                         required
                         onBlur={e=>handleValues('valor',e.target.value)}
                         className="cadcar"
+                        defaultValue={carro.valor}
                     />                
                 </FormGroup>
                 <FormGroup>
@@ -117,13 +112,13 @@ export default function FrmCar(){
                         onChange={e=>handleValues('foto',e)}
                         className="cadcar"
                         onKeyDown={e=>{if(e.keyCode == 13){e.preventDefault()}}}
-                        accept="image/png, image/jpeg"
+                        // defaultValue={`data:image/png;base64,${carro.foto}`}
                     />                
                 </FormGroup>
                 <FormGroup style={{display:'flex', justifyContent:'flex-end'}}>                
-                    <Button type="submit" value="Cadastrar"/>
+                    <Button type="submit" value="Alterar dados"/>
                 </FormGroup>
-            </Form>        
+            </Form> 
         </Wrapped>
     )
 }

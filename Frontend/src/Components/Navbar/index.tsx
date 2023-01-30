@@ -1,5 +1,6 @@
 import { useGetmycars } from '@/src/Context/Carros';
 import { useUser } from '@/src/Context/Login';
+import { TUser } from '@/src/Types';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import {
@@ -15,7 +16,7 @@ import { Reload } from '../reloadMeuscarros';
 
 function Menu() {
   const [isOpen, setIsOpen] = useState(false);
-  const [user,setUser]=useState({});
+  const [user,setUser]=useState<TUser>();
   const {handleGetmycars} = useGetmycars()
 
   const toggle = () => setIsOpen(!isOpen);
@@ -34,15 +35,11 @@ function Menu() {
     <div>
       <Navbar expand="md">
         <NavbarBrand href="/">
-            {isLoged()?(
-              <Image src={'../logo_verzel.svg'} width={209} height={70} alt={'logo verzel'}/>
-            ):(
-              <Image src={'./logo_verzel.svg'} width={209} height={70} alt={'logo verzel'}/>
-            )}
+          <Image src={'/logo_verzel.svg'} width={209} height={70} alt={'logo verzel'} priority/>            
         </NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
-          {isLoged()?(
+          {user?(
             <Nav className="me-auto" navbar style={{display:'flex',justifyItems:'flex-end'}}>
               <NavItem>
                 <NavLink href="/" disabled>

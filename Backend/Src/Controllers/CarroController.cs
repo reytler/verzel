@@ -44,9 +44,11 @@ namespace verzel.Controllers
                 Nome = carro.Nome,
                 Marca = carro.Marca,
                 Modelo = carro.Modelo,
+                Ano = carro.Ano,
+                Km = carro.Km,
                 Valor = carro.Valor,
                 Iduser = Iduser,
-                Foto = Convert.FromBase64String(carro.Foto)
+                Foto = carro.Foto
             };
 
             await carroDB.createCarro(newCarro);
@@ -69,15 +71,16 @@ namespace verzel.Controllers
 
             var carroDB = _serviceProvider.GetService<ICarroDB>();
             
-            
             var dados = new Carro(){
                 Id = novosdados.Id,
                 Nome = novosdados.Nome,
                 Marca = novosdados.Marca,
                 Modelo = novosdados.Modelo,
+                Ano = novosdados.Ano,
+                Km = novosdados.Km,
                 Valor = novosdados.Valor,
                 Iduser = Iduser,
-                Foto = Convert.FromBase64String(novosdados.Foto)
+                Foto = novosdados.Foto,
             };
 
             var carro = await carroDB.findByid(dados.Id);
@@ -145,6 +148,8 @@ namespace verzel.Controllers
                     Nome = carro.Nome,
                     Marca = carro.Marca,
                     Modelo = carro.Modelo,
+                    Ano = carro.Ano,
+                    Km = carro.Km,
                     Valor = carro.Valor,
                     Foto = carro.Foto
                 };
@@ -178,6 +183,8 @@ namespace verzel.Controllers
                     Nome = carro.Nome,
                     Marca = carro.Marca,
                     Modelo = carro.Modelo,
+                    Ano = carro.Ano,
+                    Km = carro.Km,
                     Valor = carro.Valor,
                     Foto = carro.Foto
                 };

@@ -1,7 +1,18 @@
-export type TCarro = {
-    Nome: string;
-    Marca: string;
-    Modelo: string;
-    Valor: number;
-    Foto: string;
+export type CarroDTO = {
+    id?: number;
+    nome: string;
+    marca: string;
+    modelo: string;
+    ano: number;
+    km: number;
+    valor: string | number;
+    foto: string | ArrayBuffer | null;
+}
+
+export type TUser = {
+    id: string;
+    nome: string;
+    role: string;
+    senha: string;
+    usuario: string;
 }

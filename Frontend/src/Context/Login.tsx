@@ -2,10 +2,11 @@ import Router from 'next/router';
 import { destroyCookie, parseCookies, setCookie } from 'nookies';
 import { createContext, useContext, useState } from 'react';
 import { Login } from '../services/loginService';
+import { TUser } from '../Types';
 
 type TLoginContextType = {
     handleLogin: (user: string, pass:string)=>{}
-    getUser: ()=>{}
+    getUser: ()=>TUser
     isLoged: ()=>boolean
     logout: ()=>void
 }
