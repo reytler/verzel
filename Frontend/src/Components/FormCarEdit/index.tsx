@@ -39,6 +39,9 @@ export default function FrmCar({car}:any){
         }))        
     }
 
+    useEffect(()=>{
+        console.log('CARRO: ',carro)
+    },[carro])
     return(
         <Wrapped>
                        
@@ -108,11 +111,10 @@ export default function FrmCar({car}:any){
                     <Input
                         type="file" 
                         placeholder="Foto" 
-                        required
+                        // required
                         onChange={e=>handleValues('foto',e)}
                         className="cadcar"
                         onKeyDown={e=>{if(e.keyCode == 13){e.preventDefault()}}}
-                        // defaultValue={`data:image/png;base64,${carro.foto}`}
                     />                
                 </FormGroup>
                 <FormGroup style={{display:'flex', justifyContent:'flex-end'}}>                

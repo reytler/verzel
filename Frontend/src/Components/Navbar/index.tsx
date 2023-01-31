@@ -44,7 +44,7 @@ function Menu() {
               <NavItem>
                 <NavLink href="/" disabled>
                   Bem vindo, 
-                <b> Reytler Souza</b>
+                <b> {user.nome}</b>
                 </NavLink>
               </NavItem>
               <NavItem>
@@ -60,7 +60,7 @@ function Menu() {
                 </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/login" onClick={logout}>
+                <NavLink href="/" onClick={logout}>
                   Sair
                 </NavLink>
               </NavItem>
@@ -68,7 +68,7 @@ function Menu() {
           ):(
             <Nav className="me-auto" navbar>
               <NavItem>
-                <NavLink href="/cadastro">Cadastre-se</NavLink>
+                <NavLink href="/Cadastro">Cadastre-se</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink href="/login">

@@ -1,5 +1,6 @@
 import { api } from "./api";
-import { coRotaLogin } from "../functions/constantes";
+import { coRotaCriarUsuario, coRotaLogin } from "../functions/constantes";
+import { UserDTO } from "../Types";
 
 export async function Login(user:string , pass: string){
     try {
@@ -10,5 +11,14 @@ export async function Login(user:string , pass: string){
         return res
     } catch (error) {
         console.log('Erro ao realizar login: ', error);
+    }
+}
+
+export async function createUser(user:UserDTO){
+    try {
+        const res = await api.post(coRotaCriarUsuario,user)
+        return res
+    } catch (error) {
+        console.log('Erro ao criar o usuário: ', error);
     }
 }

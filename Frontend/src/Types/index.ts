@@ -16,3 +16,10 @@ export type TUser = {
     senha: string;
     usuario: string;
 }
+
+export type UserDTO = {
+    Nome: string;
+    Usuario: string;
+    Senha: string;
+    Role: string;
+}

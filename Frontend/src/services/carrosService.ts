@@ -11,9 +11,19 @@ export async function getMycars(){
     }
 }
 
-export async function getAllcars(){
+export async function getAllcars(nome='',marca=''){
+    let url = coRotaObterCarros
     try {
-        const res = await api.get(coRotaObterCarros);
+        if(nome != '' && marca != ''){
+            url = url+`?marca=${marca}&nome=${nome}`
+        }else{
+            if(marca != ''){
+                url = url+`?marca=${marca}`
+            }else if(nome != ''){
+                url = url+`?nome=${nome}`
+            }
+        }
+        const res = await api.get(url);
         return res;
     } catch (error) {
         console.log('Erro ao obter os carros: ',error)

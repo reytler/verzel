@@ -5,7 +5,7 @@ import { CarroDTO } from '../Types';
 
 type TCarrosContextType = {
     handleGetmycars: ()=>void
-    handleGetAllcars: ()=>void
+    handleGetAllcars: (nome?:string, marca?:string)=>void
     mycars: Array<CarroDTO>
     allcars: Array<CarroDTO>
     handleCreateCar: (carro:CarroDTO)=>void
@@ -35,9 +35,9 @@ export function CarrosProvider({children}:any){
         }
     }
 
-    async function handleGetAllcars(){
+    async function handleGetAllcars(nome='',marca=''){
         try {
-            const res = await getAllcars();
+            const res = await getAllcars(nome,marca);
             //@ts-ignore
             const {data} = res
             setAllcars(data.sort((a:any,b:any)=>{return a.valor - b.valor}))

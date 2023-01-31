@@ -1,14 +1,15 @@
 import Router from 'next/router';
 import { destroyCookie, parseCookies, setCookie } from 'nookies';
 import { createContext, useContext, useState } from 'react';
-import { Login } from '../services/loginService';
-import { TUser } from '../Types';
+import { createUser, Login } from '../services/loginService';
+import { TUser, UserDTO } from '../Types';
 
 type TLoginContextType = {
     handleLogin: (user: string, pass:string)=>{}
     getUser: ()=>TUser
     isLoged: ()=>boolean
     logout: ()=>void
+    handleCreateuser: (user:UserDTO)=>void
 }
 
 export const LoginContext = createContext({} as TLoginContextType);
@@ -34,6 +35,17 @@ async function handleLogin(user: string, pass: string){
         }
     } catch (error) {
         
+    }
+}
+
+async function handleCreateuser(user:UserDTO){
+    try {
+        const res = await createUser(user)
+        if(res?.status == 201){
+            Router.push('/login');
+        }
+    } catch (error) {
+        console.log('Erro ao criar usuário: ',error)
     }
 }
 
@@ -66,6 +78,7 @@ export function LoginProvider({children}:any){
         <LoginContext.Provider
             value={{
                 handleLogin,
+                handleCreateuser,
                 getUser,
                 isLoged,
                 logout
@@ -78,8 +91,8 @@ export function LoginProvider({children}:any){
 
 export function useLogin(){
     const context = useContext(LoginContext);
-    const {handleLogin} = context;
-    return {handleLogin}
+    const {handleLogin, handleCreateuser} = context;
+    return {handleLogin, handleCreateuser}
 }
 
 export function useUser(){
