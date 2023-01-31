@@ -5,9 +5,10 @@ using verzel.Settings;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using verzel.Services;
 
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = "server=localhost; database=verzel; user=root; password=master";
+var connectionString = "server=verzeldb; database=verzel; user=root; password=master";
 var key = Encoding.ASCII.GetBytes(Config.Secret);
 
 builder.Services.AddScoped<IUserDB, UserDB>();
@@ -37,7 +38,7 @@ builder.Services.AddDbContext<VerzelContext>(
 builder.Services.AddCors();
 
 var app = builder.Build();
-
+DatabaseManagementService.MigrationInitialisation(app);
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
