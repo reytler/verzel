@@ -3,6 +3,7 @@ import { CarroDTO } from '@/src/Types';
 import React, { useEffect, useState } from 'react';
 import { Form, FormGroup } from 'reactstrap';
 import { Button } from '../Button';
+import Erro from '../Erro';
 import { Input } from '../Input';
 import { Title } from '../Title';
 import { Wrapped } from './styles';
@@ -47,13 +48,10 @@ export default function FrmCar(){
         }))        
     }
 
-    useEffect(()=>{
-        console.log(carro)
-    },[carro])
-
     return(
         <Wrapped>
-           <Title>Cadastrar Veículos</Title>     
+           <Title>Cadastrar Veículos</Title>   
+           <Erro/>  
             <Form onSubmit={e=>handleSubmit(e)}>
                 <FormGroup>
                     <Input
@@ -85,7 +83,7 @@ export default function FrmCar(){
                 <FormGroup>
                     <Input
                         type="text" 
-                        placeholder="Ano" 
+                        placeholder="Ano Fabricação (Ex.: 2012)" 
                         required
                         onBlur={e=>handleValues('ano',e.target.value)}
                         className="cadcar"
@@ -94,7 +92,7 @@ export default function FrmCar(){
                 <FormGroup>
                     <Input
                         type="text" 
-                        placeholder="Km" 
+                        placeholder="Km rodados (Sem ponto e vírgula)" 
                         required
                         onBlur={e=>handleValues('km',e.target.value)}
                         className="cadcar"
@@ -103,7 +101,7 @@ export default function FrmCar(){
                 <FormGroup>
                     <Input
                         type="text" 
-                        placeholder="Valor" 
+                        placeholder="Valor (Sem ponto e vírgula)" 
                         required
                         onBlur={e=>handleValues('valor',e.target.value)}
                         className="cadcar"

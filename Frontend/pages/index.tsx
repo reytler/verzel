@@ -1,4 +1,5 @@
 import Cardcar from '@/src/Components/Cardcar'
+import Erro from '@/src/Components/Erro'
 import { Button, Wrapped } from '@/src/Components/FormSearch'
 import { Input } from '@/src/Components/Input'
 import Navbar from '@/src/Components/Navbar'
@@ -63,7 +64,7 @@ export default function Home() {
           </FormGroup>
         </Form>
       </Wrapped>
-
+      <Erro/>
       <Container style={{display:'flex', justifyContent:'space-around', flexWrap:'wrap'}}>
         {
           allcars.length > 0?

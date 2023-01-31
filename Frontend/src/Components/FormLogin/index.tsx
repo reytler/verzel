@@ -2,6 +2,7 @@ import { useLogin } from "@/src/Context/Login";
 import { useState } from "react";
 import { Form, FormGroup } from "reactstrap";
 import { Button } from "../Button";
+import Erro from "../Erro";
 import { Input } from "../Input";
 import { Container, Titlefrm, Wrapper, Logo, Arealogo, Border } from "./styles";
 
@@ -24,7 +25,7 @@ export default function FrmLogin() {
             </Border>
             <Container>
                 <Titlefrm>Faça login na sua conta</Titlefrm>
-                
+                <Erro/>
                 <Form onSubmit={formHandle}>
                     <FormGroup>
                         <Input 

@@ -6,6 +6,7 @@ import { useGetmycars } from "@/src/Context/Carros";
 import React, { useEffect, useState } from "react";
 import { Container } from "reactstrap";
 import { CarroDTO } from "@/src/Types";
+import Erro from "@/src/Components/Erro";
 
 export default function Homeadmin(){
 
@@ -29,7 +30,10 @@ export default function Homeadmin(){
     return(
         <Layoutadmin>
             {edit?(''):(
-                <Title>Meus Veículos</Title>
+                <>
+                    <Erro/>
+                    <Title>Meus Veículos</Title>
+                </>
             )}
             <Container style={{display:'flex', justifyContent:'space-around', flexWrap:'wrap'}}>
                 {edit?

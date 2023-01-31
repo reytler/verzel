@@ -3,56 +3,38 @@ import {coRotaAtualizarCarro, coRotaCriarCarro, coRotaDeletarCarro, coRotaObterC
 import { CarroDTO } from "../Types";
 
 export async function getMycars(){
-    try {
-        const res = await api.get(coRotaObterMeusCarros);
-        return res;
-    } catch (error) {
-        console.log('Erro ao obter seus carros: ',error)
-    }
+    const res = await api.get(coRotaObterMeusCarros);
+    return res;
 }
 
 export async function getAllcars(nome='',marca=''){
     let url = coRotaObterCarros
-    try {
-        if(nome != '' && marca != ''){
-            url = url+`?marca=${marca}&nome=${nome}`
-        }else{
-            if(marca != ''){
-                url = url+`?marca=${marca}`
-            }else if(nome != ''){
-                url = url+`?nome=${nome}`
-            }
+
+    if(nome != '' && marca != ''){
+        url = url+`?marca=${marca}&nome=${nome}`
+    }else{
+        if(marca != ''){
+            url = url+`?marca=${marca}`
+        }else if(nome != ''){
+            url = url+`?nome=${nome}`
         }
-        const res = await api.get(url);
-        return res;
-    } catch (error) {
-        console.log('Erro ao obter os carros: ',error)
     }
+    const res = await api.get(url);
+    return res;
+
 }
 
 export async function createCar(car: CarroDTO){
-    try {
-        const res = await api.post(coRotaCriarCarro,car);
-        return res;
-    } catch (error) {
-        console.log('Erro ao salvar carro: ',error)
-    }
+    const res = await api.post(coRotaCriarCarro,car);
+    return res;
 }
 
 export async function updateCar(car: CarroDTO){
-    try {
-        const res = await api.post(coRotaAtualizarCarro,car);
-        return res;
-    } catch (error) {
-        console.log('Erro ao editar carro: ',error)
-    }
+    const res = await api.post(coRotaAtualizarCarro,car);
+    return res;
 }
 
 export async function deleteCar(id: number){
-    try {
-        const res = await api.delete(coRotaDeletarCarro+id);
-        return res;
-    } catch (error) {
-        console.log('Erro ao deletar carro: ',error)
-    }
+    const res = await api.delete(coRotaDeletarCarro+id);
+    return res;
 }

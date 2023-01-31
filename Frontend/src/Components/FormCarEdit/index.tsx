@@ -3,6 +3,7 @@ import { CarroDTO } from '@/src/Types';
 import React, { useEffect, useState } from 'react';
 import { Form, FormGroup } from 'reactstrap';
 import { Button } from '../Button';
+import Erro from '../Erro';
 import { Input } from '../Input';
 import { Title } from '../Title';
 import { Wrapped } from './styles';
@@ -39,13 +40,11 @@ export default function FrmCar({car}:any){
         }))        
     }
 
-    useEffect(()=>{
-        console.log('CARRO: ',carro)
-    },[carro])
     return(
         <Wrapped>
                        
-            <Title>Editar Veículo: {carro.nome}</Title>     
+            <Title>Editar Veículo: {carro.nome}</Title>
+            <Erro/>     
             <Form onSubmit={e=>handleSubmit(e)}>
                 <FormGroup>
                     <Input
@@ -80,7 +79,7 @@ export default function FrmCar({car}:any){
                 <FormGroup>
                     <Input
                         type="text" 
-                        placeholder="Ano" 
+                        placeholder="Ano Fabricação" 
                         required
                         onBlur={e=>handleValues('ano',e.target.value)}
                         className="cadcar"

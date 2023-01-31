@@ -1,8 +1,10 @@
+import { useError } from '@/src/Context/Erros';
 import { useLogin } from '@/src/Context/Login';
 import { UserDTO } from '@/src/Types';
 import React, { useEffect, useState } from 'react';
 import { Form, FormGroup } from 'reactstrap';
 import { Button } from '../Button';
+import Erro from '../Erro';
 import { Input } from '../Input';
 import { Title } from '../Title';
 import { Wrapped } from './styles';
@@ -16,12 +18,19 @@ export default function FrmUser(){
     }
 
     const [user, setUser] = useState<UserDTO>(INITIAL_STATE);
-    const [senhas,setSenhas] = useState<{}>()
+    const [senha,setSenha] = useState<string>('')
+    const [confirmSenha,setConfirmSenha] = useState<string>('')
     const {handleCreateuser} = useLogin()
+    const {setError,removeError} = useError()
 
     function handleSubmit(e:any){
         e.preventDefault();
-        handleCreateuser(user);
+        if(senha === confirmSenha){
+            handleCreateuser(user);
+            removeError('SENHA')
+        }else{
+            setError({field:'SENHA',message:'As senhas não conferem'})
+        }
     }
 
     function handleValues(key:string,value: any){
@@ -31,36 +40,23 @@ export default function FrmUser(){
         })) 
     }
 
-    function handleSenha(key:string,value:string){
-        setSenhas(prev=>({
-            ...prev,
-            [key]:value
-        }))
-    }
-
     useEffect(()=>{
-
-        if(senhas?.hasOwnProperty('senha1') && senhas?.hasOwnProperty('senha1')){
-            //@ts-ignore
-            if(senhas.senha1 === senhas.senha2){
-                console.log('As senha conferem')
-                //@ts-ignore
-                handleValues('Senha',senhas.senha1)
-            }else{
-                console.log('As senhas não conferem')
-            }
+        if(senha === confirmSenha){
+            removeError('SENHA')
+            handleValues('Senha',senha)
+        }else{
+            setError({field:'SENHA',message:'As senhas não conferem'})
         }
-
-        console.log('SENHAS:',senhas)
-    },[senhas])
+    },[senha,confirmSenha])
 
     useEffect(()=>{
-        console.log('USER:',user)
+        console.log(user)
     },[user])
 
     return(
         <Wrapped>
             <Title>Seu cadastro</Title>
+            <Erro/>
             <Form className='form' onSubmit={e=>handleSubmit(e)}>
                 <FormGroup>
                     <Input
@@ -85,7 +81,7 @@ export default function FrmUser(){
                         type="password" 
                         placeholder="Sua senha" 
                         required
-                        onBlur={e=>handleSenha('senha1',e.target.value)}
+                        onChange={e=>setSenha(e.target.value)}
                         className="caduser"
                     />
                 </FormGroup>
@@ -94,7 +90,7 @@ export default function FrmUser(){
                         type="password" 
                         placeholder="Confirmar senha" 
                         required
-                        onBlur={e=>handleSenha('senha2',e.target.value)}
+                        onChange={e=>setConfirmSenha(e.target.value)}
                         className="caduser"
                     />
                 </FormGroup>
