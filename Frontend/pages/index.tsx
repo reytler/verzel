@@ -69,7 +69,7 @@ export default function Home() {
         {
           allcars.length > 0?
           allcars.map((carro)=>(<Cardcar key={carro.id} carro={carro}/>))
-          :('Você não tem carros cadastrados')
+          :('Não existem carros cadastrados')
         }
       </Container>
     </>
