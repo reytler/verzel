@@ -51,7 +51,7 @@ export default function FrmCar({car}:any){
                         type="text" 
                         placeholder="Nome" 
                         required
-                        onBlur={e=>handleValues('nome',e.target.value)}
+                        onChange={e=>handleValues('nome',e.target.value)}
                         className="cadcar"
                         defaultValue={carro.nome}
                     />
@@ -61,7 +61,7 @@ export default function FrmCar({car}:any){
                         type="text" 
                         placeholder="Marca" 
                         required
-                        onBlur={e=>handleValues('marca',e.target.value)}
+                        onChange={e=>handleValues('marca',e.target.value)}
                         className="cadcar"
                         defaultValue={carro.marca}
                     />
@@ -71,7 +71,7 @@ export default function FrmCar({car}:any){
                         type="text" 
                         placeholder="Modelo" 
                         required
-                        onBlur={e=>handleValues('modelo',e.target.value)}
+                        onChange={e=>handleValues('modelo',e.target.value)}
                         className="cadcar"
                         defaultValue={carro.modelo}
                     />                
@@ -81,7 +81,7 @@ export default function FrmCar({car}:any){
                         type="text" 
                         placeholder="Ano Fabricação" 
                         required
-                        onBlur={e=>handleValues('ano',e.target.value)}
+                        onChange={e=>handleValues('ano',e.target.value)}
                         className="cadcar"
                         defaultValue={carro.ano}
                     />                
@@ -91,7 +91,7 @@ export default function FrmCar({car}:any){
                         type="text" 
                         placeholder="Km" 
                         required
-                        onBlur={e=>handleValues('km',e.target.value)}
+                        onChange={e=>handleValues('km',e.target.value)}
                         className="cadcar"
                         defaultValue={carro.km}
                     />                
@@ -101,7 +101,7 @@ export default function FrmCar({car}:any){
                         type="text" 
                         placeholder="Valor" 
                         required
-                        onBlur={e=>handleValues('valor',e.target.value)}
+                        onChange={e=>handleValues('valor',e.target.value)}
                         className="cadcar"
                         defaultValue={carro.valor}
                     />                

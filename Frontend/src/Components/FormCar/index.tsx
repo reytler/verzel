@@ -58,7 +58,7 @@ export default function FrmCar(){
                         type="text" 
                         placeholder="Nome" 
                         required
-                        onBlur={e=>handleValues('nome',e.target.value)}
+                        onChange={e=>handleValues('nome',e.target.value)}
                         className="cadcar"
                     />
                 </FormGroup>
@@ -67,7 +67,7 @@ export default function FrmCar(){
                         type="text" 
                         placeholder="Marca" 
                         required
-                        onBlur={e=>handleValues('marca',e.target.value)}
+                        onChange={e=>handleValues('marca',e.target.value)}
                         className="cadcar"
                     />
                 </FormGroup>
@@ -76,7 +76,7 @@ export default function FrmCar(){
                         type="text" 
                         placeholder="Modelo" 
                         required
-                        onBlur={e=>handleValues('modelo',e.target.value)}
+                        onChange={e=>handleValues('modelo',e.target.value)}
                         className="cadcar"
                     />                
                 </FormGroup>
@@ -85,7 +85,7 @@ export default function FrmCar(){
                         type="text" 
                         placeholder="Ano Fabricação (Ex.: 2012)" 
                         required
-                        onBlur={e=>handleValues('ano',e.target.value)}
+                        onChange={e=>handleValues('ano',e.target.value)}
                         className="cadcar"
                     />                
                 </FormGroup>
@@ -94,7 +94,7 @@ export default function FrmCar(){
                         type="text" 
                         placeholder="Km rodados (Sem ponto e vírgula)" 
                         required
-                        onBlur={e=>handleValues('km',e.target.value)}
+                        onChange={e=>handleValues('km',e.target.value)}
                         className="cadcar"
                     />                
                 </FormGroup>
@@ -103,7 +103,7 @@ export default function FrmCar(){
                         type="text" 
                         placeholder="Valor (Sem ponto e vírgula)" 
                         required
-                        onBlur={e=>handleValues('valor',e.target.value)}
+                        onChange={e=>handleValues('valor',e.target.value)}
                         className="cadcar"
                     />                
                 </FormGroup>

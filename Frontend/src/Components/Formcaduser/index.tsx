@@ -49,10 +49,6 @@ export default function FrmUser(){
         }
     },[senha,confirmSenha])
 
-    useEffect(()=>{
-        console.log(user)
-    },[user])
-
     return(
         <Wrapped>
             <Title>Seu cadastro</Title>
@@ -63,7 +59,7 @@ export default function FrmUser(){
                         type="text" 
                         placeholder="Nome Completo" 
                         required
-                        onBlur={e=>handleValues('Nome',e.target.value)}
+                        onChange={e=>handleValues('Nome',e.target.value)}
                         className="caduser"
                     />
                 </FormGroup>
@@ -72,7 +68,7 @@ export default function FrmUser(){
                         type="email" 
                         placeholder="Seu melhor e-mail" 
                         required
-                        onBlur={e=>handleValues('Usuario',e.target.value)}
+                        onChange={e=>handleValues('Usuario',e.target.value)}
                         className="caduser"
                     />
                 </FormGroup>

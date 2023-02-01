@@ -45,7 +45,7 @@ export default function Home() {
               type='text'
               placeholder='Busque por marca'
               className='input'
-              onBlur={e=>setMarca(e.target.value)}
+              onChange={e=>setMarca(e.target.value)}
             />            
           </FormGroup>
           <FormGroup>
@@ -56,7 +56,7 @@ export default function Home() {
               type='text'
               placeholder='Busque por nome'
               className='input'
-              onBlur={e=>setNome(e.target.value)}
+              onChange={e=>setNome(e.target.value)}
             />
           </FormGroup>
           <FormGroup>                
